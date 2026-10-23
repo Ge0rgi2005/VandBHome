@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Продай имота си за 24 часа | VandBHome</title>
+<meta name="description" content="VandBHome е измислена брокерска фирма (учебен проект). Директна оферта за имота ти или обява пред хиляди купувачи – безплатно и без обвързване.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Към съдържанието</a>
+<div class="topbar">Търсим 50 нови брокери – стартирай кариерата си във VandBHome <a href="#kontakt">Кандидатствай</a></div>
+
+<header class="header">
+  <a class="logo" href="#top" aria-label="VandBHome – начало">
+    <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 19 20 5l16 14v16H4z" fill="#F2B84B"/><path d="M13 35V22h6v13M23 35V22h6v13" stroke="#0E3B43" stroke-width="2.5" fill="none"/></svg>
+    <span>VandB<b>Home</b></span>
+  </a>
+  <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
+  <nav id="nav" class="nav">
+    <a href="#top">Продай имот</a>
+    <a href="#obiavi">Търси имот</a>
+    <a href="#novo">Ново строителство</a>
+    <a href="#otzivi">Отзиви</a>
+    <a href="#vuprosi">Въпроси</a>
+    <a class="btn btn-sm" href="#kontakt">Обяви имот</a>
+  </nav>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="hero-text">
+    <p class="live" aria-live="polite"><i></i><span id="live-msg">Нов клиент току-що поиска оферта</span></p>
+    <h1>Продай жилището си до 24 часа</h1>
+    <p class="lead">Получи директна оферта от нас или пусни имота пред нашите купувачи. Без такси, без обвързване.</p>
+    <ul class="checks">
+      <li>Оценка от брокер в същия ден</li>
+      <li>Плащане при нотариален акт</li>
+      <li>Отказ във всеки момент</li>
+    </ul>
+    <p class="small">Над 1,2 млн. посещения на сайта годишно.*</p>
+  </div>
+
+  <form class="card form" id="lead-form" novalidate>
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab on" data-mode="Оферта" role="tab">Вземи оферта</button>
+      <button type="button" class="tab" data-mode="Обява" role="tab">Обяви имота си</button>
+    </div>
+    <div class="step on" data-step="1">
+      <label>Тип имот
+        <select name="type" required>
+          <option value="">Избери тип</option>
+          <option>1-стаен</option><option>2-стаен</option><option>3-стаен</option><option>4-стаен</option>
+          <option>Многостаен</option><option>Мезонет</option><option>Къща</option><option>Вила</option>
+          <option>Офис</option><option>Магазин</option><option>Парцел</option><option>Гараж</option>
+        </select>
+      </label>
+      <label>Град
+        <select name="city" required>
+          <option value="">Избери град</option>
+          <option>София</option><option>Пловдив</option><option>Варна</option><option>Бургас</option><option>Русе</option>
+        </select>
+      </label>
+      <button type="button" class="btn" data-next>Продължи</button>
+    </div>
+    <div class="step" data-step="2">
+      <label>Име<input name="name" type="text" autocomplete="name" required></label>
+      <label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+359 …" required></label>
+      <label class="check"><input type="checkbox" name="consent" required> Съгласен съм с правилата за защита на личните данни</label>
+      <div class="row"><button type="button" class="btn btn-ghost" data-back>Назад</button><button class="btn" type="submit">Изпрати</button></div>
+    </div>
+    <p class="msg" role="status" hidden></p>
+  </form>
+</section>
+
+<section class="offers">
+  <div class="wrap">
+    <h2>Покажи имота си и избери най-добрата цена</h2>
+    <p class="sub">Купувачите правят оферти. Ти решаваш коя да приемеш.</p>
+    <div class="offer-grid">
+      <article class="offer"><span class="av">БД</span><div><h3>Борис Димитров</h3><p>предлага за твоя имот</p></div><strong>277 000 €</strong></article>
+      <article class="offer top"><span class="av">МИ</span><div><h3>Милка Иванова</h3><p>предлага за твоя имот</p></div><strong>285 000 €</strong><em>Най-висока</em></article>
+      <article class="offer"><span class="av">ГТ</span><div><h3>Георги Тодоров</h3><p>предлага за твоя имот</p></div><strong>282 000 €</strong></article>
+    </div>
+    <p class="small">Примерни оферти за демонстрация.</p>
+  </div>
+</section>
+
+<section class="numbers">
+  <div class="wrap">
+    <h2>Реклама, която работи за теб</h2>
+    <p class="sub">Колкото повече инвестираме във видимост, толкова повече купувачи виждат твоя имот.</p>
+    <dl class="stats">
+      <div><dt>Над 3 млн. €</dt><dd>инвестирани в реклама</dd></div>
+      <div><dt>На 90 секунди</dt><dd>ново запитване от клиент</dd></div>
+      <div><dt>370 обаждания</dt><dd>всеки ден от кол центъра</dd></div>
+      <div><dt>1,2 млн.</dt><dd>посещения годишно</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="listings" id="obiavi">
+  <div class="wrap">
+    <div class="head"><h2>Актуални обяви</h2>
+      <div class="chips" role="group" aria-label="Филтър по град">
+        <button class="chip on" data-city="all">Всички</button><button class="chip" data-city="София">София</button>
+        <button class="chip" data-city="Пловдив">Пловдив</button><button class="chip" data-city="Варна">Варна</button><button class="chip" data-city="Бургас">Бургас</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<section class="novo" id="novo">
+  <div class="wrap novo-in">
+    <div><h2>Ново строителство</h2><p>Подбрани комплекси от проверени строители – с Акт 16, гарантирани срокове и ипотечна консултация от нашия екип.</p></div>
+    <a class="btn btn-accent" href="#kontakt">Заяви консултация</a>
+  </div>
+</section>
+
+<section class="reviews" id="otzivi">
+  <div class="wrap">
+    <h2>Какво казват продавачите</h2>
+    <p class="rating"><b>4,9</b> във Facebook (1 073) · <b>4,7</b> в Google (439)</p>
+    <div class="rev-grid">
+      <blockquote><p>Апартаментът ни беше продаден за девет дни. Брокерът звънеше всяка седмица с новини, без да го питаме.</p><footer>Ваня и Емо Т. – продажба и покупка, София</footer></blockquote>
+      <blockquote><p>Живея в чужбина и всичко стана с пълномощно. Получихме цената, която искахме, и никакви излишни ангажименти.</p><footer>Стела Ш. – продажба, Пловдив</footer></blockquote>
+      <blockquote><p>Директната оферта дойде същия ден. Сравних я с обявата и избрах по-добрата. Честна игра.</p><footer>Г-н Атанасов – покупка на 5 апартамента, Варна</footer></blockquote>
+      <blockquote><p>Намериха купувач за по-малко от месец, на цена над очакванията ми. Препоръчвам.</p><footer>Милена А. – продажба, Бургас</footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="vuprosi">
+  <div class="wrap narrow">
+    <h2>Често задавани въпроси</h2>
+    <details><summary>Заявката обвързва ли ме с нещо?</summary><p>Не. Консултантът ще се свърже с теб, а решението остава изцяло твое.</p></details>
+    <details><summary>Колко струва услугата?</summary><p>Оценката, офертата и консултацията са безплатни. Комисионна се дължи само при сключена сделка.</p></details>
+    <details><summary>Мога ли да се откажа по-късно?</summary><p>Да, във всеки момент и без неустойки, ако условията не ти допадат.</p></details>
+    <details><summary>Колко бързо ще получа оферта?</summary><p>В рамките на работния ден след като изпратиш данните си.</p></details>
+  </div>
+</section>
+
+<section class="cta" id="kontakt">
+  <div class="wrap">
+    <h2>Готов ли си да продадеш?</h2>
+    <p>Остави данните си в началната форма или ни се обади.</p>
+    <div class="cta-row"><a class="btn btn-accent" href="tel:+359888000111">Обади се: 0888 000 111</a><a class="btn btn-ghost light" href="#top">Към формата</a></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="wrap foot">
+    <div><a class="logo light" href="#top"><span>VandB<b>Home</b></span></a><p>+359 888 000 111<br>office@vandbhome.example</p></div>
+    <div><h3>Услуги</h3><a href="#top">Продай имот</a><a href="#obiavi">Търси имот</a><a href="#novo">Ново строителство</a></div>
+    <div><h3>Популярни търсения</h3><a href="#obiavi">Двустайни в София</a><a href="#obiavi">Къщи във Варна</a><a href="#obiavi">Апартаменти в Пловдив</a></div>
+  </div>
+  <p class="wrap legal">© 2026 VandBHome. Измислена фирма – демонстрационен проект. Всички имена, цени и отзиви са примерни. *Примерна статистика.</p>
+</footer>
+
+<a class="callbar" href="tel:+359888000111">Обади се на брокер</a>
+<script src="js/main.js"></script>
+</body>
+</html>
