@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Админ панел | VandBHome</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="adm">
+
+<header class="header">
+  <a class="logo" href="/" aria-label="VandBHome – към сайта">
+    <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 19 20 5l16 14v16H4z" fill="#F2B84B"/><path d="M13 35V22h6v13M23 35V22h6v13" stroke="#0E3B43" stroke-width="2.5" fill="none"/></svg>
+    <span>VandB<b>Home</b> <small>админ</small></span>
+  </a>
+  <div class="hd-actions">
+    <a class="btn btn-sm" href="/" target="_blank" rel="noopener">Към сайта</a>
+    <button class="btn btn-sm btn-out" id="logout" hidden>Изход</button>
+  </div>
+</header>
+
+<main class="adm-main">
+
+  <!-- Вход -->
+  <section id="login-view" class="login card" hidden>
+    <h1>Вход в админ панела</h1>
+    <form id="login-form">
+      <label>Парола<input type="password" name="password" autocomplete="current-password" required autofocus></label>
+      <button class="btn" type="submit">Вход</button>
+      <p class="msg" id="login-msg" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <!-- Табло -->
+  <section id="dash-view" hidden>
+    <div class="adm-head">
+      <div>
+        <h1>Имоти</h1>
+        <p class="sub" id="count">Зареждане…</p>
+      </div>
+      <div class="adm-tools">
+        <input type="search" id="q" placeholder="Търси по заглавие или град…" aria-label="Търсене">
+        <button class="btn btn-accent" id="add-btn">+ Добави имот</button>
+      </div>
+    </div>
+
+    <p class="flash" id="flash" role="status" hidden></p>
+
+    <div class="table-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>ID</th><th>Снимка</th><th>Заглавие</th><th>Град</th><th>Описание</th>
+            <th class="num">Цена</th><th>Статус</th><th>Добавен</th><th class="act">Действия</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<!-- Форма за добавяне / редакция -->
+<dialog id="dlg">
+  <form id="prop-form" method="dialog" novalidate>
+    <h2 id="dlg-title">Нов имот</h2>
+    <input type="hidden" name="id">
+    <label>Заглавие *<input name="title" type="text" maxlength="120" required placeholder="напр. Двустаен, Лозенец"></label>
+    <div class="two">
+      <label>Град *<input name="city" type="text" maxlength="60" required list="cities" placeholder="София"></label>
+      <label>Цена (€) *<input name="price" type="number" min="0" step="1000" required placeholder="150000"></label>
+    </div>
+    <datalist id="cities"></datalist>
+    <label>Описание<input name="details" type="text" maxlength="200" placeholder="2-стаен · 68 м² · 4 ет."></label>
+    <label>Адрес на снимка (по желание)<input name="image_url" type="url" placeholder="https://…"></label>
+    <label class="check"><input type="checkbox" name="published" checked> Публикуван в сайта</label>
+    <p class="msg" id="form-msg" role="alert" hidden></p>
+    <div class="row2">
+      <button type="button" class="btn btn-ghost" id="cancel">Отказ</button>
+      <button type="submit" class="btn" id="save">Запази</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

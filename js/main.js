@@ -1,25 +1,49 @@
-// Обяви (примерни данни)
-const props=[
- ["Двустаен, Лозенец","София","2-стаен · 68 м² · 4 ет.",168000,"#0E3B43","#5FA8A0"],
- ["Тристаен, Младост 3","София","3-стаен · 94 м² · 6 ет.",142000,"#2B6B6A","#F2B84B"],
- ["Къща с двор, Бояна","София","Къща · 210 м² · 2 000 м² двор",420000,"#0A2A30","#5FA8A0"],
- ["Едностаен, Тракия","Пловдив","1-стаен · 46 м² · 3 ет.",69000,"#3C7D78","#EAF2F1"],
- ["Тристаен, Център","Пловдив","3-стаен · 102 м² · 2 ет.",155000,"#0E3B43","#F2B84B"],
- ["Апартамент, Бриз","Варна","2-стаен · 74 м² · 5 ет.",132000,"#1F5A62","#9ED0C9"],
- ["Къща, Виница","Варна","Къща · 160 м² · гледка море",295000,"#0A2A30","#F2B84B"],
- ["Двустаен, Сарафово","Бургас","2-стаен · 63 м² · 1 ет.",88000,"#2B6B6A","#EAF2F1"]
+// Обяви – зареждат се от базата (Neon) през /api/properties.
+// Ако API-то не е достъпно (напр. файлът е отворен локално), се показват примерни данни.
+const FALLBACK=[
+ {id:1,title:"Двустаен, Лозенец",city:"София",details:"2-стаен · 68 м² · 4 ет.",price:168000},
+ {id:2,title:"Тристаен, Младост 3",city:"София",details:"3-стаен · 94 м² · 6 ет.",price:142000},
+ {id:3,title:"Къща с двор, Бояна",city:"София",details:"Къща · 210 м² · 2 000 м² двор",price:420000},
+ {id:4,title:"Едностаен, Тракия",city:"Пловдив",details:"1-стаен · 46 м² · 3 ет.",price:69000},
+ {id:5,title:"Тристаен, Център",city:"Пловдив",details:"3-стаен · 102 м² · 2 ет.",price:155000},
+ {id:6,title:"Апартамент, Бриз",city:"Варна",details:"2-стаен · 74 м² · 5 ет.",price:132000},
+ {id:7,title:"Къща, Виница",city:"Варна",details:"Къща · 160 м² · гледка море",price:295000},
+ {id:8,title:"Двустаен, Сарафово",city:"Бургас",details:"2-стаен · 63 м² · 1 ет.",price:88000}
 ];
-const grid=document.getElementById('grid');
-const fmt=n=>n.toLocaleString('bg-BG')+' €';
-function render(city){
- grid.innerHTML=props.filter(p=>city==='all'||p[1]===city).map(p=>`
- <article class="prop"><div class="pic" style="--c1:${p[4]};--c2:${p[5]}"><span>${p[1]}</span></div>
- <div class="b"><h3>${p[0]}</h3><p>${p[2]}</p><strong>${fmt(p[3])}</strong></div></article>`).join('');
+const PALETTE=[["#0E3B43","#5FA8A0"],["#2B6B6A","#F2B84B"],["#0A2A30","#5FA8A0"],["#3C7D78","#EAF2F1"],["#0E3B43","#F2B84B"],["#1F5A62","#9ED0C9"],["#0A2A30","#F2B84B"],["#2B6B6A","#EAF2F1"]];
+let props=[],curCity='all';
+const grid=document.getElementById('grid'),chipsBox=document.querySelector('.chips');
+const fmt=n=>Number(n).toLocaleString('bg-BG')+' €';
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function render(){
+ const list=props.filter(p=>curCity==='all'||p.city===curCity);
+ if(!list.length){grid.innerHTML='<p class="small">Няма обяви в момента.</p>';return}
+ grid.innerHTML=list.map(p=>{
+  const [c1,c2]=PALETTE[p.id%PALETTE.length];
+  const img=/^https?:\/\//i.test(p.image_url||'')?`<img src="${esc(p.image_url)}" alt="" loading="lazy" onerror="this.remove()">`:'';
+  return `<article class="prop"><div class="pic" style="--c1:${c1};--c2:${c2}">${img}<span>${esc(p.city)}</span></div>
+ <div class="b"><h3>${esc(p.title)}</h3><p>${esc(p.details)}</p><strong>${fmt(p.price)}</strong></div></article>`}).join('');
 }
-render('all');
-document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{
- document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');render(c.dataset.city);
+function renderChips(){
+ const cities=[...new Set(props.map(p=>p.city))].sort((a,b)=>a.localeCompare(b,'bg'));
+ if(curCity!=='all'&&!cities.includes(curCity))curCity='all';
+ chipsBox.innerHTML=['all',...cities].map(c=>`<button class="chip${c===curCity?' on':''}" data-city="${esc(c)}">${c==='all'?'Всички':esc(c)}</button>`).join('');
+}
+chipsBox.addEventListener('click',e=>{
+ const b=e.target.closest('.chip');if(!b)return;
+ curCity=b.dataset.city;
+ chipsBox.querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));
+ render();
 });
+async function loadProps(){
+ try{
+  const r=await fetch('/api/properties',{headers:{Accept:'application/json'}});
+  if(!r.ok)throw new Error(r.status);
+  props=await r.json();
+ }catch(_){props=FALLBACK}
+ renderChips();render();
+}
+loadProps();
 
 // Меню
 const burger=document.querySelector('.burger'),nav=document.getElementById('nav');
