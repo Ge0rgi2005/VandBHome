@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Обяви имот | VandBHome</title>
+<meta name="description" content="Обяви имота си във VandBHome и получи оферти от купувачи. Попълни формата – брокер ще се свърже с теб в рамките на работния ден.">
+<meta name="theme-color" content="#0B2F36">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main">
+<section class="page-hero"><div class="wrap"><span class="eyebrow" style="color:var(--sun)">Продажба и наем</span><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">Обяви имота си при нас</h1><p>Получи редица оферти от купувачи и избери най-добрата за теб. Услугата е безплатна и без обвързване.</p></div></section>
+<section id="kontakt">
+  <div class="wrap two-col">
+    <form class="form-card" id="a-form" novalidate>
+      <h2 style="font-size:1.6rem">Данни за имота</h2>
+      <div class="two"><label>Вид сделка<select name="deal"><option>Продажба</option><option>Наем</option></select></label>
+        <label>Тип имот<select name="type"><option value="">Избери тип</option><option>1-стаен</option><option>2-стаен</option><option>3-стаен</option><option>4-стаен</option><option>Многостаен</option><option>Мезонет</option><option>Къща</option><option>Вила</option><option>Етаж от къща</option><option>Офис</option><option>Магазин</option><option>Заведение</option><option>Склад</option><option>Парцел</option><option>Гараж</option></select></label></div>
+      <div class="two"><label>Град<select name="city"><option value="">Избери град</option><option>София</option><option>Пловдив</option><option>Варна</option><option>Бургас</option><option>Русе</option></select></label>
+        <label>Квартал<input name="district" type="text" maxlength="80"></label></div>
+      <div class="two"><label>Площ (м²)<input name="area" type="number" min="0" inputmode="numeric"></label>
+        <label>Очаквана цена (€)<input name="price" type="number" min="0" inputmode="numeric"></label></div>
+      <label>Допълнителна информация<textarea name="message" maxlength="800" placeholder="Етаж, състояние, особености…"></textarea></label>
+      <h2 style="font-size:1.6rem;margin-top:8px">Твоите данни</h2>
+      <div class="two"><label>Име<input name="name" type="text" autocomplete="name"></label>
+        <label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+359 …"></label></div>
+      <label>Имейл (по желание)<input name="email" type="email" autocomplete="email"></label>
+      <label class="check"><input type="checkbox" name="consent"> <span>Съгласен съм с правилата за <a href="/privacy" target="_blank">защита на личните данни</a></span></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn-sun" type="submit">Изпрати заявката</button>
+      <p class="msg" role="status" hidden></p>
+    </form>
+    <div class="prose">
+      <h2>Защо да обявиш при нас</h2>
+      <ul class="checks"><li>Достъп до хиляди активни купувачи</li><li>Професионални снимки и реклама</li><li>Юридическа проверка на документите</li><li>Директна оферта – ако искаш по-бързо</li><li>Комисионна само при сключена сделка</li></ul>
+      <h2>Предпочиташ да се обадиш?</h2>
+      <p><a class="btn" href="tel:+359888000111">0888 000 111</a></p>
+      <p class="small">Пн–Пт 9:00–18:00 · office@vandbhome.example</p>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/common.js"></script>
+<script src="/js/forms.js"></script>
+</body>
+</html>

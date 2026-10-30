@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ново строителство | VandBHome</title>
+<meta name="description" content="Нови жилища с Акт 16 от проверени строители – подбрани проекти в София, Пловдив, Варна и Бургас.">
+<meta name="theme-color" content="#0B2F36">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main">
+<section class="page-hero" style="padding-bottom:70px">
+  <div class="wrap"><span class="eyebrow" style="color:var(--sun)">Проекти</span><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">Ново строителство</h1><p>Подбрани проекти с Акт 16, гарантирани срокове и ипотечна консултация от нашия екип.</p></div>
+</section>
+<section style="padding-top:0">
+  <div class="wrap">
+    <form class="filters" id="filters" novalidate>
+      <div class="deal-tabs" id="deal-tabs" role="group" aria-label="Вид сделка"><button type="button" data-deal="sale" class="on">Продажби</button><button type="button" data-deal="rent">Наеми</button></div>
+      <div class="f-row">
+        <label>Град<select name="city" id="f-city"><option value="">Всички градове</option></select></label>
+        <label>Тип имот<select name="type" id="f-type"><option value="">Всички типове</option></select></label>
+        <label>Площ от (м²)<input name="minArea" type="number" min="0" inputmode="numeric"></label>
+        <label>Площ до (м²)<input name="maxArea" type="number" min="0" inputmode="numeric"></label>
+      </div>
+      <div class="f-row">
+        <label>Цена от (€)<input name="minPrice" type="number" min="0" inputmode="numeric"></label>
+        <label>Цена до (€)<input name="maxPrice" type="number" min="0" inputmode="numeric"></label>
+        <label>Код на обявата<input name="code" type="text" placeholder="напр. VB-1003"></label>
+        <div style="display:flex;gap:10px;align-items:end"><button class="btn btn-sun" type="submit" style="flex:1">Търси</button><button class="btn btn-ghost" type="button" id="f-clear">Изчисти</button></div>
+      </div>
+    </form>
+    <div class="resbar">
+      <p id="count" style="margin:0;font-weight:700">Зареждане…</p>
+      <label style="display:flex;align-items:center;gap:10px;font-weight:600">Сортиране:
+        <select id="f-sort"><option value="new">Най-нови</option><option value="price_asc">По цена (възходящо)</option><option value="price_desc">По цена (низходящо)</option><option value="sqm">По цена на м²</option></select></label>
+    </div>
+    <div class="grid" id="grid"></div>
+    <nav class="pager" id="pager" aria-label="Страници"></nav>
+    <div class="contact-strip"><div><h3>Не намираш мечтания дом?</h3><p style="margin:4px 0 0;color:var(--mut)">Свържи се с нас и ще ти покажем и офертите, които още не са в сайта.</p></div><a class="btn" href="/advert#kontakt">Свържи се с нас</a></div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/common.js"></script>
+<script>window.VB_NEWC=true</script><script src="/js/properties.js"></script>
+</body>
+</html>

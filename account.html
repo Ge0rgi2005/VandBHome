@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Моят профил | VandBHome</title>
+<meta name="description" content="Любими имоти и следене на цените във VandBHome.">
+<meta name="theme-color" content="#0B2F36">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main">
+<section class="page-hero"><div class="wrap"><span class="eyebrow" style="color:var(--sun)">Профил</span><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">Моят профил</h1><p id="acc-sub">Любими имоти и следене на цените.</p></div></section>
+<section>
+  <div class="wrap">
+    <div id="acc-guest" hidden class="form-card" style="max-width:520px"><h2 style="font-size:1.6rem">Влез в профила си</h2><p style="margin:0;color:var(--mut)">За да запазваш имоти и да получаваш известия за промяна в цената, влез с имейла си.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn" id="g-login">Вход</button><button class="btn btn-ghost" id="g-reg">Регистрация</button></div></div>
+    <div id="acc-user" hidden>
+      <div class="head"><div><h2 style="font-size:1.8rem">Любими имоти</h2><p id="acc-mail" class="small" style="margin:6px 0 0"></p></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-ghost btn-sm" id="a-logout">Изход</button><button class="btn btn-ghost btn-sm" id="a-del" style="color:var(--err)">Изтрий профила</button></div></div>
+      <div class="grid" id="fav-grid"></div>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="/js/common.js"></script>
+<script src="/js/account.js"></script>
+</body>
+</html>
