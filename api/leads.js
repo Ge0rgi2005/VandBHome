@@ -2,7 +2,7 @@ const { getSql, ensureSchema } = require('../lib/db');
 const { userId } = require('../lib/auth');
 const { EMAIL_RE } = require('../lib/http');
 
-const KINDS = ['offer', 'listing', 'contact', 'property', 'mortgage', 'career'];
+const KINDS = ['offer', 'listing', 'contact', 'property', 'mortgage', 'career', 'scholarship', 'project'];
 const PHONE_RE = /^[+0-9()\s-]{6,20}$/;
 
 // POST /api/leads – запитвания от формите в сайта

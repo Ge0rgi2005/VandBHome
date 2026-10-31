@@ -15,12 +15,21 @@
 <body>
 <div id="site-header"></div>
 <main id="main">
-<section class="page-hero" style="padding-bottom:70px">
+<section class="page-hero">
   <div class="wrap"><span class="eyebrow" style="color:var(--sun)">Проекти</span><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">Ново строителство</h1><p>Подбрани проекти с Акт 16, гарантирани срокове и ипотечна консултация от нашия екип.</p></div>
 </section>
-<section style="padding-top:0">
+<section>
   <div class="wrap">
-    <form class="filters" id="filters" novalidate>
+    <span class="eyebrow">Комплекси и сгради</span><h2>Проекти с налични жилища</h2>
+    <p class="sub">Подбрани проекти от проверени строители. Избери проект, за да видиш свободните апартаменти и цените им.</p>
+    <div class="grid" id="projects"><p class="empty">Зареждане на проектите…</p></div>
+  </div>
+</section>
+<section class="reviews" style="padding-top:60px">
+  <div class="wrap">
+    <h2 style="margin-bottom:24px">Всички жилища ново строителство</h2>
+    <form class="filters" style="margin-top:0"
+ id="filters" novalidate>
       <div class="deal-tabs" id="deal-tabs" role="group" aria-label="Вид сделка"><button type="button" data-deal="sale" class="on">Продажби</button><button type="button" data-deal="rent">Наеми</button></div>
       <div class="f-row">
         <label>Град<select name="city" id="f-city"><option value="">Всички градове</option></select></label>
@@ -48,6 +57,6 @@
 </main>
 <div id="site-footer"></div>
 <script src="/js/common.js"></script>
-<script>window.VB_NEWC=true</script><script src="/js/properties.js"></script>
+<script>window.VB_NEWC=true</script><script src="/js/projects.js"></script><script src="/js/properties.js"></script>
 </body>
 </html>

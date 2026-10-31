@@ -17,4 +17,8 @@
     k.onsubmit = (e) => { e.preventDefault(); VB.sendLead(k, 'career'); };
     $$('[data-pos]').forEach((b) => b.addEventListener('click', () => { $('#k-pos').value = b.dataset.pos; }));
   }
+
+  // Стипендии
+  const s = $('#s-form');
+  if (s) s.onsubmit = (e) => { e.preventDefault(); VB.sendLead(s, 'scholarship'); };
 })();

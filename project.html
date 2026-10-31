@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проект | VandBHome</title>
+<meta name="description" content="Проект ново строителство във VandBHome: описание, диапазон на цените и свободни жилища.">
+<meta name="theme-color" content="#0B2F36">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="site-header"></div>
+<main id="main">
+<div class="wrap">
+  <p class="crumbs"><a href="/">Начало</a> / <a href="/new-construction">Ново строителство</a> / <span id="crumb">…</span></p>
+  <div id="pr-head"><p class="empty">Зареждане…</p></div>
+  <div class="detail" style="margin-top:34px;margin-bottom:80px">
+    <div><h2 style="font-size:1.6rem;margin-bottom:20px">Свободни жилища</h2><div class="grid" id="grid" style="grid-template-columns:repeat(auto-fill,minmax(250px,1fr))"></div></div>
+    <aside class="side">
+      <form class="form-card" id="pr-form" novalidate>
+        <h2 style="font-size:1.35rem">Заяви оглед или оферта</h2>
+        <label>Име<input name="name" type="text" autocomplete="name"></label>
+        <label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+359 …"></label>
+        <label>Съобщение<textarea name="message"></textarea></label>
+        <label class="check"><input type="checkbox" name="consent"> <span>Съгласен съм с правилата за <a href="/privacy" target="_blank">защита на личните данни</a></span></label><input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-sun" type="submit">Изпрати запитване</button>
+        <p class="msg" role="status" hidden></p>
+      </form>
+      <a class="calc-link" href="/mortgage"><b>Изчисли ипотечна вноска →</b><span>Планирай финансирането на покупката.</span></a>
+    </aside>
+  </div>
+</div>
+</main>
+<div id="site-footer"></div>
+<script src="/js/common.js"></script>
+<script src="/js/projects.js"></script>
+</body>
+</html>

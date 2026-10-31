@@ -8,18 +8,18 @@ module.exports = async (req, res) => {
   if (req.method === 'GET') return res.status(200).json({ admin: auth.isAdmin(req) });
 
   if (req.method === 'POST') {
-    if (!auth.configured()) return res.status(500).json({ error: 'Не е зададена ADMIN_PASSWORD във Vercel.' });
+    if (!auth.adminConfigured()) return res.status(500).json({ error: 'Не е зададена ADMIN_PASSWORD във Vercel.' });
     const password = req.body && req.body.password;
     if (!auth.passwordOk(password)) {
       await new Promise((r) => setTimeout(r, 700)); // забавяне срещу налучкване
       return res.status(401).json({ error: 'Грешна парола.' });
     }
-    auth.login(res);
+    auth.adminLogin(res);
     return res.status(200).json({ admin: true });
   }
 
   if (req.method === 'DELETE') {
-    auth.logout(res);
+    auth.adminLogout(res);
     return res.status(200).json({ admin: false });
   }
 

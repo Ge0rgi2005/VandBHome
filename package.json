@@ -1,6 +1,6 @@
 {
   "name": "vandbhome",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "private": true,
   "description": "VandBHome – сайт за имоти с админ панел (Vercel + Neon Postgres)",
   "engines": { "node": ">=18" },

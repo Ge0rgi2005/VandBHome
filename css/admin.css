@@ -1,46 +1,36 @@
 .adm{background:var(--mist);min-height:100vh}
-.logo small{font-size:.7rem;font-weight:600;background:var(--sun);color:var(--ink2);padding:2px 8px;border-radius:999px;margin-left:6px;vertical-align:middle}
+.logo small{font-size:.68rem;font-weight:700;background:var(--sun);color:var(--ink2);padding:2px 9px;border-radius:999px;margin-left:6px;vertical-align:middle}
 .hd-actions{display:flex;gap:10px}
-.btn-out{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #ffffff66}.btn-out:hover{background:#ffffff1a}
-.adm-main{max-width:1240px;margin:auto;padding:32px 20px 80px}
-.adm h1{font-size:1.9rem}
-.login{max-width:420px;margin:60px auto}.login h1{margin-bottom:18px;font-size:1.5rem}.login form{display:grid;gap:14px}
-.adm-head{display:flex;flex-wrap:wrap;gap:16px;align-items:end;justify-content:space-between;margin-bottom:20px}
-.adm-head .sub{margin:4px 0 0}
-.adm-tools{display:flex;flex-wrap:wrap;gap:10px}
-.adm-tools input{min-width:260px;padding:12px 14px;border-radius:999px;border:2px solid var(--line);background:var(--bg);color:var(--txt);font:400 1rem Onest,sans-serif}
-.flash{background:var(--ink);color:var(--sun);font-weight:600;padding:10px 16px;border-radius:10px;margin:0 0 16px}
-.flash.err{background:#7a1f16;color:#fff}
-
-.table-wrap{overflow-x:auto;background:var(--bg);border:1px solid var(--line);border-radius:var(--r)}
-.tbl{width:100%;border-collapse:collapse;font-size:.93rem;min-width:900px}
+.btn-out{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px #ffffff55}.btn-out:hover{background:#ffffff1f}
+.adm-main{max-width:1320px;margin:auto;padding:28px 20px 80px}
+.login{max-width:420px;margin:60px auto}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 20px}.stat b{display:block;font:800 1.9rem Fraunces,serif;color:var(--teal)}.stat span{color:var(--mut);font-size:.88rem}
+.adm-tabs{display:flex;gap:6px;margin-bottom:18px;border-bottom:2px solid var(--line)}
+.adm-tabs button{background:none;border:0;padding:12px 18px;font:700 .95rem "Plus Jakarta Sans",sans-serif;color:var(--mut);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px}
+.adm-tabs button.on{color:var(--txt);border-bottom-color:var(--sun)}
+.pill{background:var(--err);color:#fff;border-radius:999px;padding:1px 8px;font-size:.75rem;margin-left:4px}
+.adm-head{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.adm-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.adm-tools input{min-width:260px;border-radius:999px}
+.flash{background:var(--ink);color:var(--sun);font-weight:600;padding:10px 16px;border-radius:10px;margin:0 0 16px}.flash.err{background:#7a1f16;color:#fff}
+.table-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r)}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;min-width:980px}
 .tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
 .tbl thead th{background:var(--ink);color:#fff;font-weight:600;position:sticky;top:0;white-space:nowrap}
-.tbl tbody tr:hover{background:var(--mist)}
-.tbl tbody tr:last-child td{border-bottom:0}
-.tbl .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
-.tbl td.num{font-weight:700}
-.tbl .act{text-align:right;white-space:nowrap}
-.tbl .id{color:var(--mut)}
+.tbl tbody tr:hover{background:var(--mist)}.tbl tbody tr:last-child td{border-bottom:0}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.tbl td.num{font-weight:700}
+.tbl .act{text-align:right;white-space:nowrap}.tbl .id{color:var(--mut);white-space:nowrap}
 .tbl .thumb{width:56px;height:40px;border-radius:8px;object-fit:cover;display:block;background:linear-gradient(135deg,var(--ink),var(--sea))}
-.tbl .t{font-weight:600}.tbl .d{color:var(--mut);max-width:260px}
-.tbl .empty{text-align:center;color:var(--mut);padding:40px}
-.badge{display:inline-block;padding:3px 12px;border-radius:999px;font-size:.8rem;font-weight:600}
-.badge.on{background:#d3f1e2;color:#0b5a37}.badge.off{background:#eee;color:#555}
-@media (prefers-color-scheme:dark){.badge.on{background:#12503a;color:#b8f0d6}.badge.off{background:#2a3b3d;color:#b9c9c8}}
-.ibtn{border:0;border-radius:8px;padding:7px 12px;font:600 .85rem Onest,sans-serif;cursor:pointer;background:var(--mist);color:var(--txt);margin-left:6px}
-.ibtn:hover{background:var(--line)}.ibtn.del{color:#c0392b}
-
-dialog{border:0;border-radius:20px;padding:0;width:min(520px,94vw);background:var(--bg);color:var(--txt);box-shadow:0 30px 80px #0008}
-dialog::backdrop{background:#0a2a30aa}
-dialog form{padding:26px;display:grid;gap:14px}
-dialog h2{font-size:1.5rem}
-dialog label{color:var(--txt)}
-dialog input[type=text],dialog input[type=url],dialog input[type=number],dialog input[type=password],.login input{width:100%;padding:12px 14px;border-radius:10px;border:2px solid var(--line);font:400 1rem Onest,sans-serif;background:#fff;color:#12262A}
+.tbl .t{font-weight:700}.tbl .d{color:var(--mut);max-width:300px}.tbl .empty{text-align:center;color:var(--mut);padding:40px}
+.badge{display:inline-block;padding:3px 12px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.badge.on{background:#d3f1e2;color:#0b5a37}.badge.off{background:#eee;color:#555}.badge.rent{background:#fdf0cf;color:#7a5600}.badge.sale{background:#dcecf0;color:#0b4a55}.badge.new{background:#fde2dd;color:#8a2417}
+@media (prefers-color-scheme:dark){.badge.on{background:#12503a;color:#b8f0d6}.badge.off{background:#2a3b3d;color:#b9c9c8}.badge.rent{background:#4a3a10;color:#f6dc9a}.badge.sale{background:#12404a;color:#bfe3ea}.badge.new{background:#5a2018;color:#fbc8c0}.stat b{color:var(--sun)}}
+.ibtn{border:0;border-radius:8px;padding:7px 12px;font:700 .82rem "Plus Jakarta Sans",sans-serif;cursor:pointer;background:var(--mist);color:var(--txt);margin-left:6px}.ibtn:hover{background:var(--line)}.ibtn.del{color:#c0392b}
+.msgcell{max-width:340px;white-space:pre-line}
+dialog{width:min(620px,94vw);max-height:92vh;overflow:auto}
+dialog form{gap:12px}
 dialog .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 dialog .row2{display:grid;grid-template-columns:1fr 2fr;gap:10px}
-dialog .btn-ghost{color:var(--txt);box-shadow:inset 0 0 0 2px var(--line)}
-.login .btn{background:var(--sun);color:var(--ink2)}
-dialog .msg{color:#c0392b;margin:0}
-.login .msg{color:#ff9d8f;margin:0}
+.checks-row{display:flex;flex-wrap:wrap;gap:18px}
 @media (max-width:600px){dialog .two{grid-template-columns:1fr}.adm-tools input{min-width:0;flex:1 1 100%}}

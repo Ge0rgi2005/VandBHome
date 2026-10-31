@@ -63,14 +63,19 @@
           <div><a class="logo" href="/">${LOGO}<span>VandB<b>Home</b></span></a>
             <p>+359 888 000 111<br>office@vandbhome.example</p><p>Пн–Пт 9:00–18:00</p></div>
           <div><h3>Услуги</h3><a href="/">Продай имот</a><a href="/properties">Търси имот</a><a href="/new-construction">Ново строителство</a><a href="/mortgage">Ипотечен кредит</a><a href="/advert">Обяви имот</a></div>
-          <div><h3>Компания</h3><a href="/about">За нас</a><a href="/about#ekip">Екип</a><a href="/careers">Кариери</a><a href="/privacy">Защита на личните данни</a></div>
+          <div><h3>Компания</h3><a href="/about">За нас</a><a href="/members">Екип</a><a href="/careers">Кариери</a><a href="/stipendii">Стипендии</a><a href="/blog">Блог</a><a href="/privacy">Защита на личните данни</a></div>
           <div><h3>Популярни търсения</h3>
-            <a href="/properties?city=София&type=2-стаен">Двустайни в София</a><a href="/properties?city=Варна&type=Къща">Къщи във Варна</a>
-            <a href="/properties?city=Пловдив">Имоти в Пловдив</a><a href="/properties?deal=rent">Имоти под наем</a></div>
+            <a href="/nedvizhimi-imoti-sofia">Имоти в София</a><a href="/dvustayni-apartamenti-sofia">Двустайни в София</a><a href="/tristayni-apartamenti-sofia">Тристайни в София</a>
+            <a href="/kashti-varna">Къщи във Варна</a><a href="/nedvizhimi-imoti-plovdiv">Имоти в Пловдив</a><a href="/apartamenti-pod-naem-sofia">Под наем в София</a></div>
         </div>
         <p class="legal">© 2026 VandBHome. Измислена фирма – демонстрационен проект. Всички имена, цени, отзиви и обяви са примерни. Не се извършват реални сделки.</p>
       </div></footer>
-      <a class="callbar" href="tel:+359888000111">Обади се на брокер</a>`;
+      <div class="fab" role="group" aria-label="Бърза връзка">
+        <button type="button" class="fab-q" id="fab-q">Запитване</button>
+        <a href="tel:+359888000111">Обади се</a>
+        <a href="viber://chat?number=%2B359888000111">Пиши на Вайбър</a>
+      </div>`;
+    const fq = $('#fab-q'); if (fq) fq.onclick = openQuick;
 
     const burger = $('.burger'), nav = $('#nav');
     if (burger) burger.onclick = () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); };
@@ -220,6 +225,28 @@
 
   VB.consentHtml = '<label class="check"><input type="checkbox" name="consent"> <span>Съгласен съм с правилата за <a href="/privacy" target="_blank">защита на личните данни</a></span></label>';
   VB.hpHtml = '<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">';
+
+  // ---------- Бързо запитване ----------
+  let qdlg;
+  function openQuick() {
+    if (!qdlg) {
+      qdlg = document.createElement('dialog');
+      qdlg.innerHTML = `<button class="dlg-x" aria-label="Затвори" type="button">×</button>
+        <form id="quick-form" novalidate><h2 style="font-size:1.5rem">Бързо запитване</h2>
+        <p class="small" style="margin:0">Остави данните си и брокер ще ти се обади в рамките на работния ден.</p>
+        <label>Име<input name="name" type="text" autocomplete="name"></label>
+        <label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+359 …"></label>
+        <label>Съобщение (по желание)<textarea name="message" maxlength="500"></textarea></label>
+        ${VB.consentHtml}${VB.hpHtml}
+        <button class="btn btn-sun" type="submit">Изпрати</button><p class="msg" role="status" hidden></p></form>`;
+      document.body.appendChild(qdlg);
+      $('.dlg-x', qdlg).onclick = () => qdlg.close();
+      qdlg.addEventListener('click', (e) => { if (e.target === qdlg) qdlg.close(); });
+      $('#quick-form').onsubmit = async (e) => { e.preventDefault(); const ok = await VB.sendLead(e.target, 'contact'); if (ok) setTimeout(() => qdlg.close(), 1800); };
+    }
+    $('#quick-form .msg').hidden = true;
+    qdlg.showModal();
+  }
 
   // ---------- Старт ----------
   renderChrome();

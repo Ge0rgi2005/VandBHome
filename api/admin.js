@@ -28,7 +28,9 @@ module.exports = async (req, res) => {
                (SELECT count(*)::int FROM properties WHERE published) AS published,
                (SELECT count(*)::int FROM leads WHERE status = 'new') AS new_leads,
                (SELECT count(*)::int FROM leads) AS leads,
-               (SELECT count(*)::int FROM users) AS users`;
+               (SELECT count(*)::int FROM users) AS users,
+               (SELECT count(*)::int FROM projects) AS projects,
+               (SELECT count(*)::int FROM posts) AS posts`;
       return res.status(200).json(s);
     }
 
