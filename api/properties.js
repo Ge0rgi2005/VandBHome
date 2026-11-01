@@ -2,14 +2,15 @@ const { getSql, ensureSchema } = require('../lib/db');
 const { isAdmin } = require('../lib/auth');
 const { idFromCode, publicProp } = require('../lib/http');
 
-const FIELDS = 'id, title, deal, type, city, district, details, description, price, area, floor, bedrooms, construction, furnished, new_construction, project_id, image_url, images, published, created_at';
+const FIELDS = 'id, title, deal, type, city, district, details, description, price, area, floor, bedrooms, construction, furnished, new_construction, project_id, badge, featured, image_url, images, published, created_at';
 const SORTS = {
   new: 'id DESC',
   price_asc: 'price ASC, id DESC',
   price_desc: 'price DESC, id DESC',
+  featured: 'featured DESC, id DESC',
   sqm: '(price::float / NULLIF(area, 0)) ASC NULLS LAST, id DESC',
 };
-const URL_RE = /^https?:\/\/\S+$/i;
+const URL_RE = /^(https?:\/\/\S+|\/api\/image\?id=\d+)$/i;
 
 function clean(b) {
   b = b || {};
@@ -23,19 +24,21 @@ function clean(b) {
     price: Number(b.price), area: Number(b.area || 0), bedrooms: Number(b.bedrooms || 0),
     furnished: !!b.furnished, new_construction: !!b.new_construction,
     published: b.published === undefined ? true : !!b.published,
+    badge: s('badge', 40), featured: !!b.featured,
     project_id: b.project_id === null || b.project_id === undefined || b.project_id === '' ? null : Number(b.project_id),
   };
   if (!v.title || v.title.length > 120) return { error: 'Заглавието е задължително (до 120 символа).' };
   if (!v.city || v.city.length > 60) return { error: 'Градът е задължителен (до 60 символа).' };
   if (!v.type || v.type.length > 40) return { error: 'Типът е задължителен.' };
   if (v.project_id !== null && !Number.isInteger(v.project_id)) return { error: 'Невалиден проект.' };
+  if (v.badge.length > 40) return { error: 'Етикетът е до 40 символа.' };
   if (v.district.length > 80) return { error: 'Кварталът е до 80 символа.' };
   if (v.details.length > 200) return { error: 'Краткото описание е до 200 символа.' };
   if (v.description.length > 4000) return { error: 'Подробното описание е до 4000 символа.' };
   if (!Number.isInteger(v.price) || v.price < 0 || v.price > 1e9) return { error: 'Цената трябва да е цяло число ≥ 0.' };
   if (!Number.isInteger(v.area) || v.area < 0 || v.area > 1e6) return { error: 'Площта трябва да е цяло число ≥ 0.' };
   if (!Number.isInteger(v.bedrooms) || v.bedrooms < 0 || v.bedrooms > 50) return { error: 'Спални: число от 0 до 50.' };
-  if (v.image_url && !URL_RE.test(v.image_url)) return { error: 'Основната снимка трябва да е http(s) адрес.' };
+  if (v.image_url && !URL_RE.test(v.image_url)) return { error: 'Основната снимка трябва да е http(s) адрес или качен файл.' };
   const extra = v.images ? v.images.split('\n').map((x) => x.trim()).filter(Boolean) : [];
   if (extra.length > 12 || extra.some((u) => !URL_RE.test(u) || u.length > 500)) return { error: 'Допълнителни снимки: до 12 http(s) адреса, по един на ред.' };
   v.images = extra.join('\n');
@@ -126,18 +129,18 @@ module.exports = async (req, res) => {
       if (error) return res.status(400).json({ error });
       if (req.method === 'POST') {
         const [row] = await sql.query(
-          `INSERT INTO properties (title, deal, type, city, district, details, description, price, area, floor, bedrooms, construction, furnished, new_construction, image_url, images, published, project_id)
-           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING ${FIELDS}`,
-          [v.title, v.deal, v.type, v.city, v.district, v.details, v.description, v.price, v.area, v.floor, v.bedrooms, v.construction, v.furnished, v.new_construction, v.image_url, v.images, v.published, v.project_id]);
+          `INSERT INTO properties (title, deal, type, city, district, details, description, price, area, floor, bedrooms, construction, furnished, new_construction, image_url, images, published, project_id, badge, featured)
+           VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20) RETURNING ${FIELDS}`,
+          [v.title, v.deal, v.type, v.city, v.district, v.details, v.description, v.price, v.area, v.floor, v.bedrooms, v.construction, v.furnished, v.new_construction, v.image_url, v.images, v.published, v.project_id, v.badge, v.featured]);
         return res.status(201).json(row);
       }
       const id = Number(req.body && req.body.id);
       if (!Number.isInteger(id)) return res.status(400).json({ error: 'Невалидно ID.' });
       const [row] = await sql.query(
         `UPDATE properties SET title=$1, deal=$2, type=$3, city=$4, district=$5, details=$6, description=$7, price=$8, area=$9, floor=$10,
-           bedrooms=$11, construction=$12, furnished=$13, new_construction=$14, image_url=$15, images=$16, published=$17, project_id=$18
-         WHERE id=$19 RETURNING ${FIELDS}`,
-        [v.title, v.deal, v.type, v.city, v.district, v.details, v.description, v.price, v.area, v.floor, v.bedrooms, v.construction, v.furnished, v.new_construction, v.image_url, v.images, v.published, v.project_id, id]);
+           bedrooms=$11, construction=$12, furnished=$13, new_construction=$14, image_url=$15, images=$16, published=$17, project_id=$18, badge=$19, featured=$20
+         WHERE id=$21 RETURNING ${FIELDS}`,
+        [v.title, v.deal, v.type, v.city, v.district, v.details, v.description, v.price, v.area, v.floor, v.bedrooms, v.construction, v.furnished, v.new_construction, v.image_url, v.images, v.published, v.project_id, v.badge, v.featured, id]);
       if (!row) return res.status(404).json({ error: 'Имотът не е намерен.' });
       return res.status(200).json(row);
     }

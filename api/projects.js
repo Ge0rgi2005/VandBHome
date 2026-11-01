@@ -1,7 +1,7 @@
 const { getSql, ensureSchema } = require('../lib/db');
 const { isAdmin } = require('../lib/auth');
 
-const URL_RE = /^https?:\/\/\S+$/i;
+const URL_RE = /^(https?:\/\/\S+|\/api\/image\?id=\d+)$/i;
 const FIELDS = 'id, name, city, district, tagline, description, stage, image_url, published, created_at';
 
 function clean(b) {

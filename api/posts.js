@@ -1,7 +1,7 @@
 const { getSql, ensureSchema } = require('../lib/db');
 const { isAdmin } = require('../lib/auth');
 
-const URL_RE = /^https?:\/\/\S+$/i;
+const URL_RE = /^(https?:\/\/\S+|\/api\/image\?id=\d+)$/i;
 const SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const FIELDS = 'id, slug, title, excerpt, body, cover_url, published, created_at';
 

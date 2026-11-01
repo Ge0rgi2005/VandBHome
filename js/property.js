@@ -2,7 +2,7 @@
   const { $, $$, api, esc, fmt } = VB;
   const id = Number(new URLSearchParams(location.search).get('id'));
   const root = $('#detail');
-  const isUrl = (u) => /^https?:\/\//i.test(u || '');
+  const isUrl = (u) => VB.imgOk(u);
 
   async function init() {
     if (!Number.isInteger(id) || id <= 0) return fail();

@@ -1,6 +1,6 @@
 (function () {
   const { $, api, esc, fmt } = VB;
-  const isUrl = (u) => /^https?:\/\//i.test(u || '');
+  const isUrl = (u) => VB.imgOk(u);
 
   function projectCard(p) {
     const [c1, c2] = VB.pal(p.id + 3);
