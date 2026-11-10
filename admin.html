@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Админ панел | VandBHome</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="adm">
+
+<header class="header dark"><div class="header-in">
+  <a class="logo" href="/" aria-label="VandBHome – към сайта">
+    <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E6BFF"/><stop offset="1" stop-color="#0B1F3A"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg)" stroke="#ffffff2e"/><path d="M8 21 24 7.5 40 21" fill="none" stroke="#FF8A5B" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 26 17 40.5 24.5 26" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26v14.5M30 26h4.8a3.9 3.9 0 0 1 0 7.8H30m0 0h5.6a3.5 3.5 0 0 1 0 6.7H30" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>VandB<b>Home</b> <small>админ</small></span>
+  </a>
+  <div class="hd-actions">
+    <a class="btn btn-sm btn-out" href="/" target="_blank" rel="noopener">Към сайта</a>
+    <button class="btn btn-sm btn-out" id="logout" hidden>Изход</button>
+  </div>
+</div></header>
+
+<main class="adm-main">
+
+  <section id="login-view" class="login form-card" hidden>
+    <h1 style="font-size:1.6rem">Вход в админ панела</h1>
+    <form id="login-form" style="display:grid;gap:14px">
+      <label>Парола<input type="password" name="password" autocomplete="current-password" required autofocus></label>
+      <button class="btn btn-sun" type="submit">Вход</button>
+      <p class="msg" id="login-msg" role="alert" hidden></p>
+    </form>
+  </section>
+
+  <section id="dash-view" hidden style="padding:0">
+    <div class="stat-row" id="stats"></div>
+
+    <div class="adm-tabs" role="tablist">
+      <button class="on" data-tab="props" role="tab">Имоти</button>
+      <button data-tab="projects" role="tab">Проекти</button>
+      <button data-tab="posts" role="tab">Блог</button>
+      <button data-tab="content" role="tab">Съдържание и дизайн</button>
+      <button data-tab="contacts" role="tab">Контакти</button>
+      <button data-tab="leads" role="tab">Запитвания <span class="pill" id="pill-leads" hidden></span></button>
+      <button data-tab="users" role="tab">Потребители</button>
+    </div>
+
+    <p class="flash" id="flash" role="status" hidden></p>
+
+    <!-- Имоти -->
+    <div id="tab-props">
+      <div class="adm-head">
+        <p class="sub" id="count" style="margin:0">Зареждане…</p>
+        <div class="adm-tools">
+          <input type="search" id="q" placeholder="Търси по заглавие, град, код…" aria-label="Търсене">
+          <button class="btn btn-ghost btn-sm" id="seed-btn" title="Добавя 16 примерни имота">Примерни данни</button>
+          <button class="btn btn-sun" id="add-btn">+ Добави имот</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Код</th><th>Снимка</th><th>Заглавие</th><th>Сделка</th><th>Тип</th><th>Град / квартал</th><th class="num">Площ</th><th class="num">Цена</th><th>Статус</th><th class="act">Действия</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Запитвания -->
+    <div id="tab-leads" hidden>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>Дата</th><th>Вид</th><th>Име</th><th>Телефон</th><th>Имейл</th><th>Подробности</th><th>Статус</th><th class="act">Действия</th></tr></thead>
+          <tbody id="lead-rows"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Съдържание и дизайн -->
+    <div id="tab-content" hidden>
+      <p class="sub" style="margin:0 0 16px">Редактирай текстове, снимки, цветове, екип и секции на сайта. Промените се виждат на сайта до около 20 секунди след запис.</p>
+      <div class="ed-grid" id="editor"><p class="empty">Зареждане…</p></div>
+      <div class="ed-bar"><span class="small" id="ed-state"></span><button class="btn btn-ghost btn-sm" id="ed-reset" type="button">Върни по подразбиране</button><button class="btn btn-sun" id="ed-save" type="button">Запази промените</button></div>
+    </div>
+
+    <!-- Контакти -->
+    <div id="tab-contacts" hidden>
+      <div class="adm-head"><p class="sub" style="margin:0" id="contacts-count">Всички хора, оставили запитване – с профил или без.</p>
+        <div class="adm-tools"><input type="search" id="q-contacts" placeholder="Търси по име, телефон, имейл…" aria-label="Търсене"><button class="btn btn-ghost btn-sm" id="csv-contacts">Изтегли CSV</button></div></div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>Име</th><th>Телефон</th><th>Имейл</th><th class="num">Запитвания</th><th>Последно</th><th>Профил</th><th class="act">Действия</th></tr></thead>
+        <tbody id="contact-rows"></tbody></table></div>
+    </div>
+
+    <!-- Проекти -->
+    <div id="tab-projects" hidden>
+      <div class="adm-head"><p class="sub" style="margin:0">Комплекси и сгради за „Ново строителство“. Свържи имоти с проект от формата на имота.</p><button class="btn btn-sun" id="add-project">+ Нов проект</button></div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>ID</th><th>Име</th><th>Град / квартал</th><th>Етап</th><th>Статус</th><th class="act">Действия</th></tr></thead>
+        <tbody id="project-rows"></tbody></table></div>
+    </div>
+
+    <!-- Блог -->
+    <div id="tab-posts" hidden>
+      <div class="adm-head"><p class="sub" style="margin:0">Статии за страницата „Блог“.</p><button class="btn btn-sun" id="add-post">+ Нова статия</button></div>
+      <div class="table-wrap"><table class="tbl">
+        <thead><tr><th>Дата</th><th>Заглавие</th><th>Адрес (slug)</th><th>Статус</th><th class="act">Действия</th></tr></thead>
+        <tbody id="post-rows"></tbody></table></div>
+    </div>
+
+    <!-- Потребители -->
+    <div id="tab-users" hidden>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th>ID</th><th>Имейл</th><th>Име</th><th class="num">Любими</th><th>Регистриран</th><th class="act">Действия</th></tr></thead>
+          <tbody id="user-rows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+<dialog id="dlg">
+  <form id="prop-form" method="dialog" novalidate>
+    <h2 id="dlg-title">Нов имот</h2>
+    <input type="hidden" name="id">
+    <label>Заглавие *<input name="title" type="text" maxlength="120" required placeholder="напр. Двустаен с тераса, Лозенец"></label>
+    <div class="two">
+      <label>Вид сделка *<select name="deal"><option value="sale">Продажба</option><option value="rent">Наем</option></select></label>
+      <label>Тип имот *<input name="type" type="text" maxlength="40" list="types" required placeholder="2-стаен"></label>
+    </div>
+    <datalist id="types"><option>1-стаен</option><option>2-стаен</option><option>3-стаен</option><option>4-стаен</option><option>Многостаен</option><option>Мезонет</option><option>Къща</option><option>Вила</option><option>Етаж от къща</option><option>Офис</option><option>Магазин</option><option>Заведение</option><option>Склад</option><option>Парцел</option><option>Гараж</option></datalist>
+    <div class="two">
+      <label>Град *<input name="city" type="text" maxlength="60" required list="cities" placeholder="София"></label>
+      <label>Квартал<input name="district" type="text" maxlength="80" placeholder="Лозенец"></label>
+    </div>
+    <datalist id="cities"></datalist>
+    <div class="two">
+      <label>Цена (€) *<input name="price" type="number" min="0" step="1" required placeholder="150000"></label>
+      <label>Площ (м²)<input name="area" type="number" min="0" step="1" placeholder="68"></label>
+    </div>
+    <div class="two">
+      <label>Етаж<input name="floor" type="text" maxlength="20" placeholder="4 или Партер"></label>
+      <label>Спални<input name="bedrooms" type="number" min="0" max="50" step="1" placeholder="1"></label>
+    </div>
+    <label>Строителство<input name="construction" type="text" maxlength="40" list="constr" placeholder="Тухла"></label>
+    <datalist id="constr"><option>Тухла</option><option>Панел</option><option>ЕПК</option><option>Гредоред</option></datalist>
+    <label>Проект (за ново строителство)<select name="project_id"><option value="">— без проект —</option></select></label>
+    <label>Кратко описание (за картите)<input name="details" type="text" maxlength="200" placeholder="2-стаен · 68 м² · 4 ет."></label>
+    <label>Подробно описание<textarea name="description" maxlength="4000" placeholder="Описание на имота…"></textarea></label>
+    <label>Основна снимка<span class="up-row"><input name="image_url" type="text" placeholder="https://… или качи файл"><button type="button" class="btn btn-ghost btn-sm" data-upload="image_url">Качи</button></span></label>
+    <label>Още снимки (по един адрес на ред)<textarea name="images" placeholder="https://…" style="min-height:70px"></textarea></label>
+    <button type="button" class="btn btn-ghost btn-sm" data-upload="images" data-append style="justify-self:start">+ Качи още снимка</button>
+    <div class="two">
+      <label>Етикет върху снимката<input name="badge" type="text" maxlength="40" placeholder="напр. Топ оферта, Намалена цена"></label>
+      <label class="check" style="align-self:end"><input type="checkbox" name="featured"> Покажи първа на началната страница</label>
+    </div>
+    <div class="checks-row">
+      <label class="check"><input type="checkbox" name="furnished"> Обзаведен</label>
+      <label class="check"><input type="checkbox" name="new_construction"> Ново строителство</label>
+      <label class="check"><input type="checkbox" name="published" checked> Публикуван в сайта</label>
+    </div>
+    <p class="msg" id="form-msg" role="alert" hidden></p>
+    <div class="row2">
+      <button type="button" class="btn btn-ghost" id="cancel">Отказ</button>
+      <button type="submit" class="btn btn-sun" id="save">Запази</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlg-project">
+  <form id="project-form" method="dialog" novalidate>
+    <h2 id="dlg-project-title">Нов проект</h2>
+    <input type="hidden" name="id">
+    <label>Име *<input name="name" type="text" maxlength="100" required></label>
+    <div class="two"><label>Град *<input name="city" type="text" maxlength="60" required list="cities"></label><label>Квартал<input name="district" type="text" maxlength="80"></label></div>
+    <div class="two"><label>Етап<input name="stage" type="text" maxlength="60" list="stages" placeholder="В строеж"></label><label>Снимка<span class="up-row"><input name="image_url" type="text" placeholder="https://… или качи"><button type="button" class="btn btn-ghost btn-sm" data-upload="image_url">Качи</button></span></label></div>
+    <datalist id="stages"><option>Преди Акт 14</option><option>В строеж</option><option>Акт 15</option><option>Акт 16</option></datalist>
+    <label>Слоган<input name="tagline" type="text" maxlength="160"></label>
+    <label>Описание<textarea name="description" maxlength="4000"></textarea></label>
+    <label class="check"><input type="checkbox" name="published" checked> Публикуван в сайта</label>
+    <p class="msg" id="project-msg" role="alert" hidden></p>
+    <div class="row2"><button type="button" class="btn btn-ghost" data-close>Отказ</button><button type="submit" class="btn btn-sun">Запази</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-post">
+  <form id="post-form" method="dialog" novalidate>
+    <h2 id="dlg-post-title">Нова статия</h2>
+    <input type="hidden" name="id">
+    <label>Заглавие *<input name="title" type="text" maxlength="140" required></label>
+    <label>Адрес (slug) – ако е празен, се генерира от заглавието<input name="slug" type="text" maxlength="80" placeholder="kak-da-prodadem-imot"></label>
+    <label>Увод<input name="excerpt" type="text" maxlength="300"></label>
+    <label>Текст (абзаците се разделят с празен ред)<textarea name="body" maxlength="20000" style="min-height:220px"></textarea></label>
+    <label>Корица<span class="up-row"><input name="cover_url" type="text" placeholder="https://… или качи"><button type="button" class="btn btn-ghost btn-sm" data-upload="cover_url">Качи</button></span></label>
+    <label class="check"><input type="checkbox" name="published" checked> Публикувана</label>
+    <p class="msg" id="post-msg" role="alert" hidden></p>
+    <div class="row2"><button type="button" class="btn btn-ghost" data-close>Отказ</button><button type="submit" class="btn btn-sun">Запази</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-profile" class="wide">
+  <div style="padding:26px;display:grid;gap:14px">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><h2 id="prof-title" style="font-size:1.5rem">Профил</h2><button class="btn btn-ghost btn-sm" type="button" id="prof-close">Затвори</button></div>
+    <div class="prof-grid" id="prof-body"><p class="empty">Зареждане…</p></div>
+  </div>
+</dialog>
+<input type="file" id="file-pick" accept="image/jpeg,image/png,image/webp" hidden>
+<script src="/js/admin.js"></script>
+</body>
+</html>
