@@ -15,17 +15,22 @@
 <body>
 <div id="site-header"></div>
 <main id="main">
-<section class="page-hero"><div class="wrap"><span class="eyebrow">Кариери</span><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)" data-c="pages.careers.title">Изгради кариера в недвижимите имоти</h1><p data-c="pages.careers.lead"></p></div></section>
+<section class="page-hero"><div class="wrap"><span class="eyebrow" style="color:var(--sun)">Кариери</span><h1 style="font-size:clamp(2rem,4.5vw,3.2rem)">Изгради кариера в недвижимите имоти</h1><p>Обучение от първия ден, готови клиенти от рекламата ни и ясна система за растеж.</p></div></section>
 <section>
   <div class="wrap two-col">
     <div>
       <h2 style="margin-bottom:24px">Отворени позиции</h2>
-      <div class="jobs" data-list="jobs"></div>
+      <div class="jobs">
+        <div class="job"><div><h3>Брокер недвижими имоти</h3><p>София, Пловдив, Варна, Бургас · пълен или непълен ден</p></div><a class="btn btn-ghost btn-sm" href="#kandidatstvaj" data-pos="Брокер недвижими имоти">Кандидатствай</a></div>
+        <div class="job"><div><h3>Кредитен консултант</h3><p>София · пълен ден</p></div><a class="btn btn-ghost btn-sm" href="#kandidatstvaj" data-pos="Кредитен консултант">Кандидатствай</a></div>
+        <div class="job"><div><h3>Маркетинг специалист</h3><p>Пловдив · пълен ден</p></div><a class="btn btn-ghost btn-sm" href="#kandidatstvaj" data-pos="Маркетинг специалист">Кандидатствай</a></div>
+        <div class="job"><div><h3>Стажант-брокер</h3><p>Всички градове · за студенти</p></div><a class="btn btn-ghost btn-sm" href="#kandidatstvaj" data-pos="Стажант-брокер">Кандидатствай</a></div>
+      </div>
       <p class="small" style="margin-top:16px">Позициите са измислени, за демонстрация.</p>
     </div>
     <form class="form-card" id="k-form" novalidate>
       <h2 id="kandidatstvaj" style="font-size:1.6rem">Кандидатствай</h2>
-      <label>Позиция<select name="type" id="k-pos"></select></label>
+      <label>Позиция<select name="type" id="k-pos"><option>Брокер недвижими имоти</option><option>Кредитен консултант</option><option>Маркетинг специалист</option><option>Стажант-брокер</option></select></label>
       <label>Град<select name="city"><option value="">Избери град</option><option>София</option><option>Пловдив</option><option>Варна</option><option>Бургас</option><option>Русе</option></select></label>
       <div class="two"><label>Име<input name="name" type="text" autocomplete="name"></label><label>Телефон<input name="phone" type="tel" autocomplete="tel" placeholder="+359 …"></label></div>
       <label>Имейл<input name="email" type="email" autocomplete="email"></label>
@@ -38,7 +43,6 @@
 </section>
 </main>
 <div id="site-footer"></div>
-<script src="/js/site-defaults.js"></script>
 <script src="/js/common.js"></script>
 <script src="/js/forms.js"></script>
 </body>

@@ -14,9 +14,9 @@
 </head>
 <body class="adm">
 
-<header class="header dark"><div class="header-in">
+<header class="header"><div class="header-in">
   <a class="logo" href="/" aria-label="VandBHome – към сайта">
-    <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E6BFF"/><stop offset="1" stop-color="#0B1F3A"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg)" stroke="#ffffff2e"/><path d="M8 21 24 7.5 40 21" fill="none" stroke="#FF8A5B" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 26 17 40.5 24.5 26" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26v14.5M30 26h4.8a3.9 3.9 0 0 1 0 7.8H30m0 0h5.6a3.5 3.5 0 0 1 0 6.7H30" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F5560"/><stop offset="1" stop-color="#0B2F36"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg)" stroke="#ffffff2e"/><path d="M8 21 24 7.5 40 21" fill="none" stroke="#F5B841" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 26 17 40.5 24.5 26" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26v14.5M30 26h4.8a3.9 3.9 0 0 1 0 7.8H30m0 0h5.6a3.5 3.5 0 0 1 0 6.7H30" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span>VandB<b>Home</b> <small>админ</small></span>
   </a>
   <div class="hd-actions">
@@ -41,11 +41,9 @@
 
     <div class="adm-tabs" role="tablist">
       <button class="on" data-tab="props" role="tab">Имоти</button>
+      <button data-tab="leads" role="tab">Запитвания <span class="pill" id="pill-leads" hidden></span></button>
       <button data-tab="projects" role="tab">Проекти</button>
       <button data-tab="posts" role="tab">Блог</button>
-      <button data-tab="content" role="tab">Съдържание и дизайн</button>
-      <button data-tab="contacts" role="tab">Контакти</button>
-      <button data-tab="leads" role="tab">Запитвания <span class="pill" id="pill-leads" hidden></span></button>
       <button data-tab="users" role="tab">Потребители</button>
     </div>
 
@@ -77,22 +75,6 @@
           <tbody id="lead-rows"></tbody>
         </table>
       </div>
-    </div>
-
-    <!-- Съдържание и дизайн -->
-    <div id="tab-content" hidden>
-      <p class="sub" style="margin:0 0 16px">Редактирай текстове, снимки, цветове, екип и секции на сайта. Промените се виждат на сайта до около 20 секунди след запис.</p>
-      <div class="ed-grid" id="editor"><p class="empty">Зареждане…</p></div>
-      <div class="ed-bar"><span class="small" id="ed-state"></span><button class="btn btn-ghost btn-sm" id="ed-reset" type="button">Върни по подразбиране</button><button class="btn btn-sun" id="ed-save" type="button">Запази промените</button></div>
-    </div>
-
-    <!-- Контакти -->
-    <div id="tab-contacts" hidden>
-      <div class="adm-head"><p class="sub" style="margin:0" id="contacts-count">Всички хора, оставили запитване – с профил или без.</p>
-        <div class="adm-tools"><input type="search" id="q-contacts" placeholder="Търси по име, телефон, имейл…" aria-label="Търсене"><button class="btn btn-ghost btn-sm" id="csv-contacts">Изтегли CSV</button></div></div>
-      <div class="table-wrap"><table class="tbl">
-        <thead><tr><th>Име</th><th>Телефон</th><th>Имейл</th><th class="num">Запитвания</th><th>Последно</th><th>Профил</th><th class="act">Действия</th></tr></thead>
-        <tbody id="contact-rows"></tbody></table></div>
     </div>
 
     <!-- Проекти -->
@@ -151,13 +133,8 @@
     <label>Проект (за ново строителство)<select name="project_id"><option value="">— без проект —</option></select></label>
     <label>Кратко описание (за картите)<input name="details" type="text" maxlength="200" placeholder="2-стаен · 68 м² · 4 ет."></label>
     <label>Подробно описание<textarea name="description" maxlength="4000" placeholder="Описание на имота…"></textarea></label>
-    <label>Основна снимка<span class="up-row"><input name="image_url" type="text" placeholder="https://… или качи файл"><button type="button" class="btn btn-ghost btn-sm" data-upload="image_url">Качи</button></span></label>
-    <label>Още снимки (по един адрес на ред)<textarea name="images" placeholder="https://…" style="min-height:70px"></textarea></label>
-    <button type="button" class="btn btn-ghost btn-sm" data-upload="images" data-append style="justify-self:start">+ Качи още снимка</button>
-    <div class="two">
-      <label>Етикет върху снимката<input name="badge" type="text" maxlength="40" placeholder="напр. Топ оферта, Намалена цена"></label>
-      <label class="check" style="align-self:end"><input type="checkbox" name="featured"> Покажи първа на началната страница</label>
-    </div>
+    <label>Основна снимка (адрес)<input name="image_url" type="url" placeholder="https://…"></label>
+    <label>Още снимки (по един адрес на ред)<textarea name="images" placeholder="https://…&#10;https://…" style="min-height:70px"></textarea></label>
     <div class="checks-row">
       <label class="check"><input type="checkbox" name="furnished"> Обзаведен</label>
       <label class="check"><input type="checkbox" name="new_construction"> Ново строителство</label>
@@ -177,7 +154,7 @@
     <input type="hidden" name="id">
     <label>Име *<input name="name" type="text" maxlength="100" required></label>
     <div class="two"><label>Град *<input name="city" type="text" maxlength="60" required list="cities"></label><label>Квартал<input name="district" type="text" maxlength="80"></label></div>
-    <div class="two"><label>Етап<input name="stage" type="text" maxlength="60" list="stages" placeholder="В строеж"></label><label>Снимка<span class="up-row"><input name="image_url" type="text" placeholder="https://… или качи"><button type="button" class="btn btn-ghost btn-sm" data-upload="image_url">Качи</button></span></label></div>
+    <div class="two"><label>Етап<input name="stage" type="text" maxlength="60" list="stages" placeholder="В строеж"></label><label>Снимка (адрес)<input name="image_url" type="url" placeholder="https://…"></label></div>
     <datalist id="stages"><option>Преди Акт 14</option><option>В строеж</option><option>Акт 15</option><option>Акт 16</option></datalist>
     <label>Слоган<input name="tagline" type="text" maxlength="160"></label>
     <label>Описание<textarea name="description" maxlength="4000"></textarea></label>
@@ -195,20 +172,13 @@
     <label>Адрес (slug) – ако е празен, се генерира от заглавието<input name="slug" type="text" maxlength="80" placeholder="kak-da-prodadem-imot"></label>
     <label>Увод<input name="excerpt" type="text" maxlength="300"></label>
     <label>Текст (абзаците се разделят с празен ред)<textarea name="body" maxlength="20000" style="min-height:220px"></textarea></label>
-    <label>Корица<span class="up-row"><input name="cover_url" type="text" placeholder="https://… или качи"><button type="button" class="btn btn-ghost btn-sm" data-upload="cover_url">Качи</button></span></label>
+    <label>Корица (адрес на снимка)<input name="cover_url" type="url" placeholder="https://…"></label>
     <label class="check"><input type="checkbox" name="published" checked> Публикувана</label>
     <p class="msg" id="post-msg" role="alert" hidden></p>
     <div class="row2"><button type="button" class="btn btn-ghost" data-close>Отказ</button><button type="submit" class="btn btn-sun">Запази</button></div>
   </form>
 </dialog>
 
-<dialog id="dlg-profile" class="wide">
-  <div style="padding:26px;display:grid;gap:14px">
-    <div style="display:flex;justify-content:space-between;gap:10px;align-items:start"><h2 id="prof-title" style="font-size:1.5rem">Профил</h2><button class="btn btn-ghost btn-sm" type="button" id="prof-close">Затвори</button></div>
-    <div class="prof-grid" id="prof-body"><p class="empty">Зареждане…</p></div>
-  </div>
-</dialog>
-<input type="file" id="file-pick" accept="image/jpeg,image/png,image/webp" hidden>
 <script src="/js/admin.js"></script>
 </body>
 </html>

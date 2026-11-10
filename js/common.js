@@ -2,7 +2,7 @@
 (function () {
   const TYPES = ['1-стаен','2-стаен','3-стаен','4-стаен','Многостаен','Мезонет','Къща','Вила','Етаж от къща','Офис','Магазин','Заведение','Склад','Парцел','Гараж'];
   const CITIES = ['София','Пловдив','Варна','Бургас','Русе'];
-  const PALETTE = [['#0B1F3A','#7FB2FF'],['#1E6BFF','#FF8A5B'],['#07142A','#7FB2FF'],['#3B82FF','#F2F7FF'],['#0B1F3A','#FF8A5B'],['#1F5A62','#9ED0C9'],['#07142A','#FF8A5B'],['#1E6BFF','#F2F7FF']];
+  const PALETTE = [['#0B2F36','#5FA8A0'],['#0F5560','#F5B841'],['#071F24','#5FA8A0'],['#2B6B6A','#EEF4F3'],['#0B2F36','#F5B841'],['#1F5A62','#9ED0C9'],['#071F24','#F5B841'],['#0F5560','#EEF4F3']];
 
   const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const $ = (s, r) => (r || document).querySelector(s);
@@ -26,7 +26,7 @@
   window.VB = VB;
 
   // ---------- Лого ----------
-  const LOGO = `<svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1E6BFF"/><stop offset="1" stop-color="#0B1F3A"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg)" stroke="#ffffff2e"/><path d="M8 21 24 7.5 40 21" fill="none" stroke="#FF8A5B" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 26 17 40.5 24.5 26" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26v14.5M30 26h4.8a3.9 3.9 0 0 1 0 7.8H30m0 0h5.6a3.5 3.5 0 0 1 0 6.7H30" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const LOGO = `<svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0F5560"/><stop offset="1" stop-color="#0B2F36"/></linearGradient></defs><rect width="48" height="48" rx="13" fill="url(#lg)" stroke="#ffffff2e"/><path d="M8 21 24 7.5 40 21" fill="none" stroke="#F5B841" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 26 17 40.5 24.5 26" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 26v14.5M30 26h4.8a3.9 3.9 0 0 1 0 7.8H30m0 0h5.6a3.5 3.5 0 0 1 0 6.7H30" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
   VB.LOGO = LOGO;
 
   // ---------- Тост ----------
@@ -37,25 +37,18 @@
     clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('show'), 3200);
   };
 
-  // ---------- Съдържание от админ панела ----------
-  const get = (o, path) => path.split('.').reduce((x, k) => (x == null ? x : x[k]), o);
-  const digits = (p) => String(p || '').replace(/[^+\d]/g, '');
-  const imgOk = (u) => /^(https?:\/\/\S+|\/api\/image\?id=\d+)$/i.test(u || '');
-  VB.site = window.VB_DEFAULTS || {};
-  VB.imgOk = imgOk;
-
+  // ---------- Хедър / футър ----------
   const NAV = [['/', 'Продай имот'], ['/properties', 'Търси имот'], ['/new-construction', 'Ново строителство'], ['/mortgage', 'Ипотечен кредит'], ['/about', 'За нас'], ['/careers', 'Кариери']];
   function renderChrome() {
-    const S = VB.site, c = S.contact || {}, t = S.topbar || {}, f = S.footer || {};
     const path = location.pathname.replace(/\/index\.html$/, '/').replace(/\.html$/, '').replace(/(.)\/$/, '$1');
     const h = $('#site-header');
     if (h) h.innerHTML = `
       <a class="skip" href="#main">Към съдържанието</a>
-      ${t.visible ? `<div class="topbar">${esc(t.text)} <a href="${esc(t.link)}">${esc(t.link_text)}</a></div>` : ''}
+      <div class="topbar">Търсим 50 нови брокери – стартирай кариерата си във VandBHome <a href="/careers">Виж позициите →</a></div>
       <header class="header"><div class="header-in">
         <a class="logo" href="/" aria-label="VandBHome – начало">${LOGO}<span>VandB<b>Home</b></span></a>
         <nav id="nav" class="nav" aria-label="Основно меню">
-          ${NAV.map(([href, n]) => `<a class="nl${path === href ? ' on' : ''}" href="${href}">${n}</a>`).join('')}
+          ${NAV.map(([href, t]) => `<a class="nl${path === href ? ' on' : ''}" href="${href}">${t}</a>`).join('')}
         </nav>
         <div class="nav-r">
           <a class="btn btn-sun btn-sm" href="/advert">Обяви имот</a>
@@ -63,84 +56,30 @@
           <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav"><span></span><span></span></button>
         </div>
       </div></header>`;
-    const social = [['Facebook', c.facebook], ['Instagram', c.instagram], ['YouTube', c.youtube]].filter(([, u]) => u).map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${n}</a>`).join('');
-    const ft = $('#site-footer');
-    if (ft) ft.innerHTML = `
+    const f = $('#site-footer');
+    if (f) f.innerHTML = `
       <footer class="footer"><div class="wrap">
         <div class="foot">
           <div><a class="logo" href="/">${LOGO}<span>VandB<b>Home</b></span></a>
-            <p>${esc(f.about)}</p><p>${esc(c.phone)}<br>${esc(c.email)}</p><p>${esc(c.hours)}</p>${social}</div>
+            <p>+359 888 000 111<br>office@vandbhome.example</p><p>Пн–Пт 9:00–18:00</p></div>
           <div><h3>Услуги</h3><a href="/">Продай имот</a><a href="/properties">Търси имот</a><a href="/new-construction">Ново строителство</a><a href="/mortgage">Ипотечен кредит</a><a href="/advert">Обяви имот</a></div>
           <div><h3>Компания</h3><a href="/about">За нас</a><a href="/members">Екип</a><a href="/careers">Кариери</a><a href="/stipendii">Стипендии</a><a href="/blog">Блог</a><a href="/privacy">Защита на личните данни</a></div>
           <div><h3>Популярни търсения</h3>
             <a href="/nedvizhimi-imoti-sofia">Имоти в София</a><a href="/dvustayni-apartamenti-sofia">Двустайни в София</a><a href="/tristayni-apartamenti-sofia">Тристайни в София</a>
             <a href="/kashti-varna">Къщи във Варна</a><a href="/nedvizhimi-imoti-plovdiv">Имоти в Пловдив</a><a href="/apartamenti-pod-naem-sofia">Под наем в София</a></div>
         </div>
-        <p class="legal">${esc(f.legal)}</p>
+        <p class="legal">© 2026 VandBHome. Измислена фирма – демонстрационен проект. Всички имена, цени, отзиви и обяви са примерни. Не се извършват реални сделки.</p>
       </div></footer>
       <div class="fab" role="group" aria-label="Бърза връзка">
         <button type="button" class="fab-q" id="fab-q">Запитване</button>
-        <a href="tel:${esc(digits(c.phone))}">Обади се</a>
-        <a href="viber://chat?number=${encodeURIComponent(digits(c.phone))}">Пиши на Вайбър</a>
+        <a href="tel:+359888000111">Обади се</a>
+        <a href="viber://chat?number=%2B359888000111">Пиши на Вайбър</a>
       </div>`;
     const fq = $('#fab-q'); if (fq) fq.onclick = openQuick;
+
     const burger = $('.burger'), nav = $('#nav');
     if (burger) burger.onclick = () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); };
-    renderAccount();
   }
-
-  // шаблони за списъците, които се редактират от админа
-  const paras = (t) => String(t || '').split(/\n{2,}/).map((x) => `<p>${esc(x).replace(/\n/g, '<br>')}</p>`).join('');
-  const ini = (n) => String(n || '').trim().split(/\s+/).slice(0, 2).map((w) => w[0] || '').join('').toUpperCase();
-  const LISTS = {
-    'home.checks': (t) => `<li>${esc(t)}</li>`,
-    'home.offers': (o) => `<article class="offer${o.top ? ' top' : ''}"><span class="av">${esc(o.initials)}</span><div><h3>${esc(o.name)}</h3><p>предлага за твоя имот</p></div><strong>${esc(o.amount)}</strong>${o.top ? '<em>Най-висока</em>' : ''}</article>`,
-    'home.how': (o, i) => `<div><b>${i + 1}</b><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p></div>`,
-    'home.stats': (o) => `<div><dt>${esc(o.value)}</dt><dd>${esc(o.label)}</dd></div>`,
-    'home.reviews': (o) => `<blockquote><div class="stars">★★★★★</div><p>${esc(o.text)}</p><footer>${esc(o.author)}</footer></blockquote>`,
-    'home.faq': (o) => `<details><summary>${esc(o.q)}</summary><p>${esc(o.a)}</p></details>`,
-    'about.stats': (o) => `<div><dt style="color:var(--teal)">${esc(o.value)}</dt><dd style="color:var(--mut)">${esc(o.label)}</dd></div>`,
-    'about.values': (o) => `<div><h3>${esc(o.title)}</h3><p>${esc(o.text)}</p></div>`,
-    'about.offices': (o) => `<div><h3>${esc(o.name)}</h3><p>${esc(o.address)}<br>${esc(o.phone)}</p></div>`,
-    'team': (o) => `<div class="member" data-city="${esc(o.city)}">${imgOk(o.photo) ? `<img class="avimg" src="${esc(o.photo)}" alt="${esc(o.name)}" loading="lazy">` : `<span class="av">${esc(ini(o.name))}</span>`}<h3>${esc(o.name)}</h3><p>${esc(o.role)}</p><p>${esc(o.office || o.city)}</p></div>`,
-    'jobs': (o) => `<div class="job"><div><h3>${esc(o.title)}</h3><p>${esc(o.meta)}</p></div><a class="btn btn-ghost btn-sm" href="#kandidatstvaj" data-pos="${esc(o.title)}">Кандидатствай</a></div>`,
-  };
-  VB.LISTS = LISTS;
-
-  function shade(hex, f) { // f<0 – по-тъмно, f>0 – по-светло
-    const n = parseInt(hex.slice(1), 16), ch = [n >> 16, (n >> 8) & 255, n & 255].map((v) => Math.round(f < 0 ? v * (1 + f) : v + (255 - v) * f));
-    return '#' + ch.map((v) => v.toString(16).padStart(2, '0')).join('');
-  }
-
-  function applySite(S) {
-    VB.site = S;
-    const th = S.theme || {}, root = document.documentElement.style;
-    if (th.primary) { root.setProperty('--teal', th.primary); root.setProperty('--sea', shade(th.primary, .45)); }
-    if (th.accent) { root.setProperty('--sun', th.accent); root.setProperty('--sun2', shade(th.accent, -.12)); }
-    if (th.dark) { root.setProperty('--ink', th.dark); root.setProperty('--ink2', shade(th.dark, -.35)); }
-    renderChrome();
-    $$('[data-c]').forEach((el) => { const v = get(S, el.dataset.c); if (typeof v === 'string') { if (el.hasAttribute('data-paras')) el.innerHTML = paras(v); else el.textContent = v; } });
-    $$('[data-show]').forEach((el) => { el.hidden = get(S, el.dataset.show) === false; });
-    $$('[data-tel]').forEach((el) => { el.href = 'tel:' + digits(get(S, el.dataset.tel)); });
-    $$('[data-mail]').forEach((el) => { el.href = 'mailto:' + get(S, el.dataset.mail); });
-    $$('[data-list]').forEach((el) => {
-      const key = el.dataset.list, list = get(S, key), tpl = LISTS[key];
-      if (!Array.isArray(list) || !tpl) return;
-      const lim = Number(el.dataset.limit) || list.length;
-      el.innerHTML = list.slice(0, lim).map(tpl).join('');
-    });
-    const hero = $('[data-hero]');
-    if (hero) {
-      const img = get(S, 'home.hero_image');
-      if (imgOk(img)) { hero.style.backgroundImage = `url("${img}")`; hero.classList.add('has-img'); }
-      else { hero.style.backgroundImage = ''; hero.classList.remove('has-img'); }
-    }
-    $$('[data-pos]').forEach((b) => b.addEventListener('click', () => { const sel = $('#k-pos'); if (sel) sel.value = b.dataset.pos; }));
-    const pos = $('#k-pos');
-    if (pos && Array.isArray(S.jobs)) pos.innerHTML = S.jobs.map((j) => `<option>${esc(j.title)}</option>`).join('');
-    document.dispatchEvent(new CustomEvent('vb:site', { detail: S }));
-  }
-  VB.applySite = applySite;
 
   function renderAccount() {
     const slot = $('#acc-slot');
@@ -238,22 +177,11 @@
   });
 
   // ---------- Карта на имот ----------
-  const SCENES = [['#8EC5FF', '#EAF4FF'], ['#FFC3A0', '#FFF0E6'], ['#B8B5FF', '#EEEDFF'], ['#9AD1F5', '#E6F6FF'], ['#FFD59A', '#FFF4DF'], ['#A5B4FC', '#EEF0FF'], ['#FFB4C2', '#FFF0F3'], ['#9BC4FF', '#EAF2FF']];
-  const pal = (id) => SCENES[Math.abs(Number(id)) % SCENES.length];
-  // Илюстрация по подразбиране (когато имотът няма снимка)
-  VB.placeholder = (id) => {
-    const n = Math.abs(Number(id)) || 1, h1 = 60 + (n * 17) % 50, h2 = 80 + (n * 29) % 55, h3 = 50 + (n * 11) % 45;
-    return `<svg viewBox="0 0 300 190" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <circle cx="${70 + (n * 37) % 160}" cy="46" r="20" fill="#fff" opacity=".75"/>
-      <path d="M0 150c60-18 120-18 180 0s90 6 120-6v46H0z" fill="#fff" opacity=".35"/>
-      <rect x="46" y="${150 - h1}" width="62" height="${h1}" rx="6" fill="#fff" opacity=".85"/>
-      <rect x="116" y="${150 - h2}" width="74" height="${h2}" rx="6" fill="#0B1F3A" opacity=".82"/>
-      <rect x="198" y="${150 - h3}" width="56" height="${h3}" rx="6" fill="#fff" opacity=".7"/>
-      ${[0, 1, 2].map((r) => [0, 1].map((k) => `<rect x="${126 + k * 28}" y="${150 - h2 + 12 + r * 20}" width="14" height="10" rx="2" fill="#FF8A5B" opacity=".9"/>`).join('')).join('')}
-      <path d="M0 150h300v40H0z" fill="#0B1F3A" opacity=".16"/></svg>`;
-  };
+  const HOUSE = (c) => `<svg viewBox="0 0 300 180" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 130h300v50H0z" fill="#00000026"/><path d="M95 130V86l55-38 55 38v44z" fill="#ffffff2e"/><path d="M85 90l65-47 65 47" fill="none" stroke="${c}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/><rect x="132" y="98" width="36" height="32" rx="3" fill="#ffffff40"/><rect x="104" y="96" width="18" height="18" rx="2" fill="#ffffff40"/><rect x="178" y="96" width="18" height="18" rx="2" fill="#ffffff40"/></svg>`;
+  const pal = (id) => PALETTE[Math.abs(Number(id)) % PALETTE.length];
+  VB.placeholder = (id) => HOUSE(pal(id)[1] === '#EEF4F3' ? '#fff' : pal(id)[1]);
   VB.pal = pal;
-  const isUrl = (u) => imgOk(u);
+  const isUrl = (u) => /^https?:\/\//i.test(u || '');
 
   VB.card = (p, opts = {}) => {
     const [c1, c2] = pal(p.id);
@@ -264,7 +192,7 @@
     const chip = opts.extra || '';
     return `<article class="prop">
       <a class="pic" href="/property?id=${p.id}" style="--c1:${c1};--c2:${c2}" aria-label="${esc(p.title)}">${VB.placeholder(p.id)}${img}
-        <span class="tags"><span class="tag${p.deal === 'rent' ? ' sun' : ''}">${p.deal === 'rent' ? 'Наем' : 'Продажба'}</span>${p.badge ? `<span class="tag badge">${esc(p.badge)}</span>` : ''}${p.new_construction ? '<span class="tag new">Ново строителство</span>' : ''}</span></a>
+        <span class="tags"><span class="tag${p.deal === 'rent' ? ' sun' : ''}">${p.deal === 'rent' ? 'Наем' : 'Продажба'}</span>${p.new_construction ? '<span class="tag new">Ново строителство</span>' : ''}</span></a>
       <button class="fav-btn" data-fav="${p.id}" aria-label="Запази в любими" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 5 6 5c2 0 3.4 1.1 4 2.2h4C14.6 6.1 16 5 18 5c3.3 0 5.1 3.4 3.6 6.8C19.5 16.4 12 21 12 21z" stroke-linejoin="round"/></svg></button>
       <div class="b"><span class="loc">${loc} · ${esc(p.code)}</span>
         <h3><a href="/property?id=${p.id}">${esc(p.title)}</a></h3>
@@ -321,8 +249,7 @@
   }
 
   // ---------- Старт ----------
-  applySite(VB.site);
-  VB.siteReady = api('/api/site').then((S) => { applySite(S); return S; }).catch(() => VB.site);
+  renderChrome();
   VB.ready = (async () => {
     try {
       const d = await api('/api/account');
@@ -330,4 +257,5 @@
     } catch (_) {}
     renderAccount(); refreshHearts();
   })();
+  renderAccount();
 })();

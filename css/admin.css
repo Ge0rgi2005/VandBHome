@@ -24,8 +24,8 @@
 .tbl .thumb{width:56px;height:40px;border-radius:8px;object-fit:cover;display:block;background:linear-gradient(135deg,var(--ink),var(--sea))}
 .tbl .t{font-weight:700}.tbl .d{color:var(--mut);max-width:300px}.tbl .empty{text-align:center;color:var(--mut);padding:40px}
 .badge{display:inline-block;padding:3px 12px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}
-.badge.on{background:#dbe9ff;color:#0b3a8f}.badge.off{background:#eee;color:#555}.badge.rent{background:#fdf0cf;color:#7a5600}.badge.sale{background:#dcecf0;color:#0b4a55}.badge.new{background:#fde2dd;color:#8a2417}
-@media (prefers-color-scheme:dark){.badge.on{background:#12306a;color:#bcd4ff}.badge.off{background:#2a3b3d;color:#b9c9c8}.badge.rent{background:#4a3a10;color:#f6dc9a}.badge.sale{background:#12404a;color:#bfe3ea}.badge.new{background:#5a2018;color:#fbc8c0}.stat b{color:var(--sun)}}
+.badge.on{background:#d3f1e2;color:#0b5a37}.badge.off{background:#eee;color:#555}.badge.rent{background:#fdf0cf;color:#7a5600}.badge.sale{background:#dcecf0;color:#0b4a55}.badge.new{background:#fde2dd;color:#8a2417}
+@media (prefers-color-scheme:dark){.badge.on{background:#12503a;color:#b8f0d6}.badge.off{background:#2a3b3d;color:#b9c9c8}.badge.rent{background:#4a3a10;color:#f6dc9a}.badge.sale{background:#12404a;color:#bfe3ea}.badge.new{background:#5a2018;color:#fbc8c0}.stat b{color:var(--sun)}}
 .ibtn{border:0;border-radius:8px;padding:7px 12px;font:700 .82rem "Plus Jakarta Sans",sans-serif;cursor:pointer;background:var(--mist);color:var(--txt);margin-left:6px}.ibtn:hover{background:var(--line)}.ibtn.del{color:#c0392b}
 .msgcell{max-width:340px;white-space:pre-line}
 dialog{width:min(620px,94vw);max-height:92vh;overflow:auto}
@@ -34,25 +34,3 @@ dialog .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 dialog .row2{display:grid;grid-template-columns:1fr 2fr;gap:10px}
 .checks-row{display:flex;flex-wrap:wrap;gap:18px}
 @media (max-width:600px){dialog .two{grid-template-columns:1fr}.adm-tools input{min-width:0;flex:1 1 100%}}
-
-.adm .header{background:var(--ink);color:#fff}
-.adm .header .logo{color:#fff}.adm .header .logo b{color:var(--sun)}
-.badge.sale{background:#dbe9ff;color:#0b3a8f}.badge.rent{background:#ffe9dd;color:#9a3412}.badge.new{background:#ffe3d6;color:#9a3412}
-.pill{background:var(--sun)}
-.up-row{display:flex;gap:8px}.up-row input{flex:1}
-.ed-grid{display:grid;gap:18px}
-.ed-sec{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:0;overflow:hidden}
-.ed-sec>summary{cursor:pointer;padding:16px 20px;font-weight:800;font-size:1.05rem;list-style:none;display:flex;justify-content:space-between}
-.ed-sec>summary::after{content:"＋";color:var(--mut)}.ed-sec[open]>summary::after{content:"－"}
-.ed-body{padding:4px 20px 20px;display:grid;gap:14px;border-top:1px solid var(--line)}
-.ed-body label{font-size:.85rem}
-.ed-list{display:grid;gap:10px}
-.ed-item{border:1px dashed var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;background:var(--mist)}
-.ed-item .ed-top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.85rem;color:var(--mut)}
-.ed-bar{position:sticky;bottom:0;display:flex;gap:10px;justify-content:flex-end;align-items:center;background:var(--bg);border-top:1px solid var(--line);padding:14px 0;margin-top:18px}
-.ed-color{display:flex;gap:10px;align-items:center}.ed-color input[type=color]{width:56px;height:42px;border:2px solid var(--line);border-radius:10px;padding:2px;background:var(--card)}
-.prof-grid{display:grid;gap:14px}.prof-card{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--mist)}
-.prof-card h3{font-size:1rem;margin-bottom:6px}.prof-card p{margin:4px 0;font-size:.9rem;color:var(--mut)}
-.prof-card textarea{min-height:60px;margin-top:8px}
-dialog.wide{width:min(760px,95vw)}
-.thumbline{display:flex;gap:6px;flex-wrap:wrap}.thumbline img{width:58px;height:42px;object-fit:cover;border-radius:8px}

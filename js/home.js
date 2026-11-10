@@ -11,18 +11,7 @@
   $$('.tab', form).forEach((t) => (t.onclick = () => {
     kind = t.dataset.kind;
     $$('.tab', form).forEach((x) => { const on = x === t; x.classList.toggle('on', on); x.setAttribute('aria-selected', on); });
-    $('#sell-box').hidden = kind === 'search';
-    $('#buy-box').classList.toggle('on', kind === 'search');
-    $('.msg', form).hidden = true;
   }));
-  $('#hs-go').onclick = () => {
-    const q = new URLSearchParams();
-    if ($('#hs-deal').value === 'rent') q.set('deal', 'rent');
-    if ($('#hs-city').value) q.set('city', $('#hs-city').value);
-    if ($('#hs-type').value) q.set('type', $('#hs-type').value);
-    if ($('#hs-price').value) q.set('maxPrice', $('#hs-price').value);
-    location.href = '/properties' + (q.toString() ? '?' + q : '');
-  };
   $('[data-next]', form).onclick = () => {
     const t = form.elements.type, c = form.elements.city;
     [t, c].forEach((x) => x.classList.toggle('invalid', !x.value));
@@ -37,18 +26,15 @@
   };
 
   // ----- „На живо“ известия -----
+  const msgs = ['Нов клиент току-що поиска оферта', 'Нов клиент се регистрира като купувач', 'Нов клиент се регистрира като продавач', 'Нов клиент обяви имот в София', 'Нова оферта за имот във Варна'];
   let i = 0; const live = $('#live-msg');
-  setInterval(() => {
-    const msgs = (VB.site.home && VB.site.home.live) || [];
-    if (!msgs.length) return;
-    i = (i + 1) % msgs.length; live.textContent = msgs[i];
-  }, 3800);
+  setInterval(() => { i = (i + 1) % msgs.length; live.textContent = msgs[i]; }, 3800);
 
   // ----- Най-нови обяви -----
   (async () => {
     const grid = $('#grid');
     try {
-      const d = await api('/api/properties?pageSize=6&sort=featured');
+      const d = await api('/api/properties?pageSize=6');
       grid.innerHTML = d.items.length ? d.items.map((p) => VB.card(p)).join('') : '<p class="empty">Все още няма публикувани обяви.</p>';
       await VB.ready; VB.refreshHearts();
     } catch (_) { grid.innerHTML = '<p class="empty">Обявите не могат да бъдат заредени в момента.</p>'; }

@@ -1,6 +1,6 @@
 (function () {
   const { $, api, esc } = VB;
-  const isUrl = (u) => VB.imgOk(u);
+  const isUrl = (u) => /^https?:\/\//i.test(u || '');
   const fdate = (s) => new Date(s).toLocaleDateString('bg-BG', { day: 'numeric', month: 'long', year: 'numeric' });
 
   const list = $('#posts');
